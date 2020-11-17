@@ -1,4 +1,6 @@
 .DS_Store
+credentials.json
+*.pickle
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

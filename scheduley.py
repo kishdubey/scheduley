@@ -21,9 +21,17 @@ class Class:
                 Day: {self.day}\n"""
 
 def get_image(path):
+    """
+    (string) -> numpy.ndarray
+    returns image for given path
+    """
     return cv2.imread(path)
 
 def extract_information(image):
+    """
+    (numpy.ndarray) -> list
+    returns list of text extracted from given image
+    """
     extracted_info = pytesseract.image_to_string(image).strip().replace("\n\n", "\n")
     extracted_info_list = list(extracted_info.split("\n"))
 
@@ -34,6 +42,10 @@ def extract_information(image):
     return extracted_info_list
 
 def get_classes(info_list):
+    """
+    (list) -> list
+    returns list of classes of type Class from given list of raw extracted text
+    """
     WEEKDAYS = set(["monday", "tuesday", "wednesday", "thursday", "friday"])
     classes = []
     day = 'Monday'
@@ -70,8 +82,8 @@ def get_classes(info_list):
 
     return classes
 
-def main():
-    img = get_image(PATH)
+def main(path):
+    img = get_image(path)
     info_list = extract_information(img)
     classes = get_classes(info_list)
 

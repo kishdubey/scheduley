@@ -1,5 +1,7 @@
 .DS_Store
 credentials.json
+data/
+quickstart.py
 *.pickle
 
 # Byte-compiled / optimized / DLL files

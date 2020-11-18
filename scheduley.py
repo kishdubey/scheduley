@@ -1,3 +1,7 @@
+"""
+extracting classes data from an image of a class schedule
+"""
+
 import cv2
 import pytesseract
 
@@ -16,7 +20,7 @@ class Class:
         return f"""
                 Title: {self.title}
                 Type: {self.type}
-                Time: {self.start_time}-{self.end_time}
+                Time: {self.start_time} - {self.end_time}
                 Location: {self.location}
                 Day: {self.day}\n"""
 
@@ -41,6 +45,20 @@ def extract_information(image):
 
     return extracted_info_list
 
+def helper_capitalize(text):
+    """
+    (string) -> string
+    proprely capitalize course titles
+    """
+    capitalized = ''
+    for char in text:
+        if char.isalpha():
+            capitalized += char.upper()
+        else:
+            capitalized += char
+
+    return capitalized
+
 def get_classes(info_list):
     """
     (list) -> list
@@ -60,11 +78,11 @@ def get_classes(info_list):
             class_title = info_list[i+2].strip()
             class_type = info_list[i+3]
             time = info_list[i+4]
-            class_start_time = time[:7]
+            class_start_time = time[:6]
             class_end_time = time[9:]
             class_location = info_list[i+5].replace("Location: ", "")
 
-            this_class = Class(class_title, class_type, class_start_time, class_end_time, class_location, day)
+            this_class = Class(helper_capitalize(class_title), class_type, class_start_time, class_end_time, class_location, day)
             classes.append(this_class)
             i += 6
 
@@ -72,11 +90,11 @@ def get_classes(info_list):
             class_title = info_list[i].strip()
             class_type = info_list[i+1]
             time = info_list[i+2]
-            class_start_time = time[:7]
+            class_start_time = time[:6]
             class_end_time = time[9:]
             class_location = info_list[i+3].replace("Location: ", "")
 
-            this_class = Class(class_title, class_type, class_start_time, class_end_time, class_location, day)
+            this_class = Class(helper_capitalize(class_title), class_type, class_start_time, class_end_time, class_location, day)
             classes.append(this_class)
             i += 4
 
@@ -88,3 +106,5 @@ def main(path):
     classes = get_classes(info_list)
 
     return classes
+
+print(main(PATH))

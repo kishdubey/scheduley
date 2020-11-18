@@ -1,62 +1,78 @@
 import cv2
 import pytesseract
 
-class Course:
-    def __init__(self, title, type, start_time, end_time, location):
+PATH = 'data/schedule.png'
+WEEKDAYS = set(["monday", "tuesday", "wednesday", "thursday", "friday"])
+
+class Class:
+    def __init__(self, title, type, start_time, end_time, location, day):
         self.title = title
         self.type = type
         self.start_time = start_time
         self.end_time = end_time
         self.location = location
+        self.day = day
 
     def __repr__(self):
-        return f'Title: {self.title} \n\n Type: {self.type} \n\n Time: {self.start_time}-{self.end_time} \n\n Location: {self.location}'
+        return f"""
+                Title: {self.title}
+                Type: {self.type}
+                Time: {self.start_time}-{self.end_time}
+                Location: {self.location}
+                Day: {self.day}\n"""
 
-image = cv2.imread('data/schedule.png')
+def get_image(path):
+    return cv2.imread(path)
 
-extracted_info = pytesseract.image_to_string(image).strip().replace("\n\n", "\n")
+def extract_information(image):
+    extracted_info = pytesseract.image_to_string(image).strip().replace("\n\n", "\n")
+    extracted_info_list = list(extracted_info.split("\n"))
 
-extracted_info_list = list(extracted_info.split("\n"))
+    for item in extracted_info_list:
+        if item == " ":
+            extracted_info_list.remove(item)
 
-for item in extracted_info_list:
-    if item == " ":
-        extracted_info_list.remove(item)
+    return extracted_info_list
 
-weekdays = set(["monday", "tuesday", "wednesday", "thursday", "friday"])
+def get_classes(info_list):
+    classes = []
+    day = 'Monday'
+    i = 0
 
-courses = []
+    while i < len(info_list):
+        current = info_list[i]
 
-i = 0
-while i < len(extracted_info_list):
-    item = extracted_info_list[i]
-    # if weekday
-    if item.lower() in weekdays:
-        print(item)
-        courses.append("\n")
+        if current.lower() in WEEKDAYS:
+            day = current
 
-        course_title = extracted_info_list[i+2].strip()
-        course_type = extracted_info_list[i+3]
-        time = extracted_info_list[i+4]
-        course_start_time = time[:7]
-        course_end_time = time[9:]
-        course_location = extracted_info_list[i+5].replace("Location: ", "")
+            class_title = info_list[i+2].strip()
+            class_type = info_list[i+3]
+            time = info_list[i+4]
+            class_start_time = time[:7]
+            class_end_time = time[9:]
+            class_location = info_list[i+5].replace("Location: ", "")
 
-        course = Course(course_title, course_type, course_start_time, course_end_time, course_location)
-        courses.append(course)
-        i += 6
+            this_class = Class(class_title, class_type, class_start_time, class_end_time, class_location, day)
+            classes.append(this_class)
+            i += 6
 
-    # else if next course of same day
-    else:
-        course_title = extracted_info_list[i].strip()
-        course_type = extracted_info_list[i+1]
-        time = extracted_info_list[i+2]
-        course_start_time = time[:7]
-        course_end_time = time[9:]
-        course_location = extracted_info_list[i+3].replace("Location: ", "")
+        else:
+            class_title = info_list[i].strip()
+            class_type = info_list[i+1]
+            time = info_list[i+2]
+            class_start_time = time[:7]
+            class_end_time = time[9:]
+            class_location = info_list[i+3].replace("Location: ", "")
 
-        course = Course(course_title, course_type, course_start_time, course_end_time, course_location)
-        courses.append(course)
-        i += 4
+            this_class = Class(class_title, class_type, class_start_time, class_end_time, class_location, day)
+            classes.append(this_class)
+            i += 4
 
-for course in courses:
-    print(course)
+    return classes
+
+def main():
+    img = get_image(PATH)
+    info_list = extract_information(img)
+    classes = get_classes(info_list)
+
+    return classes

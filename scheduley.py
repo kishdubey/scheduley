@@ -2,7 +2,6 @@ import cv2
 import pytesseract
 
 PATH = 'data/schedule.png'
-WEEKDAYS = set(["monday", "tuesday", "wednesday", "thursday", "friday"])
 
 class Class:
     def __init__(self, title, type, start_time, end_time, location, day):
@@ -35,6 +34,7 @@ def extract_information(image):
     return extracted_info_list
 
 def get_classes(info_list):
+    WEEKDAYS = set(["monday", "tuesday", "wednesday", "thursday", "friday"])
     classes = []
     day = 'Monday'
     i = 0

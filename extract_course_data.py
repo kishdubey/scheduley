@@ -105,5 +105,3 @@ def main(path):
     classes = get_classes(info_list)
 
     return classes
-
-print(main(PATH))

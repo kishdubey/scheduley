@@ -5,7 +5,7 @@ extracting classes data from an image of a class schedule
 import cv2
 import pytesseract
 
-PATH = 'data/schedule.png'
+PATH = 'data/schedule1.png'
 
 class Class:
     def __init__(self, title, type, start_time, end_time, location, day):
@@ -71,7 +71,6 @@ def get_classes(info_list):
 
     while i < len(info_list):
         current = info_list[i]
-
         if current.lower() in WEEKDAYS:
             day = current
 
@@ -79,7 +78,7 @@ def get_classes(info_list):
             class_type = info_list[i+3]
             time = info_list[i+4]
             class_start_time = time[:6]
-            class_end_time = time[9:]
+            class_end_time = time[8:]
             class_location = info_list[i+5].replace("Location: ", "")
 
             this_class = Class(helper_capitalize(class_title), class_type, class_start_time, class_end_time, class_location, day)
@@ -91,7 +90,7 @@ def get_classes(info_list):
             class_type = info_list[i+1]
             time = info_list[i+2]
             class_start_time = time[:6]
-            class_end_time = time[9:]
+            class_end_time = time[8:]
             class_location = info_list[i+3].replace("Location: ", "")
 
             this_class = Class(helper_capitalize(class_title), class_type, class_start_time, class_end_time, class_location, day)

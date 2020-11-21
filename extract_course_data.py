@@ -5,8 +5,6 @@ extracting classes data from an image of a class schedule
 import cv2
 import pytesseract
 
-PATH = 'data/schedule1.png'
-
 class Class:
     def __init__(self, title, type, start_time, end_time, location, day):
         self.title = title
@@ -99,7 +97,7 @@ def get_classes(info_list):
 
     return classes
 
-def main(path):
+def get_schedule(path):
     img = get_image(path)
     info_list = extract_information(img)
     classes = get_classes(info_list)

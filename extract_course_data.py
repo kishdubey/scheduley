@@ -1,7 +1,6 @@
 """
 extracting courses data from an image of a course schedule
 """
-
 import cv2
 import pytesseract
 
@@ -57,13 +56,13 @@ def helper_capitalize(text):
 
     return capitalized
 
-def get_coursees(info_list):
+def get_courses(info_list):
     """
     (list) -> list
-    returns list of coursees of type Course from given list of raw extracted text
+    returns list of courses of type Course from given list of raw extracted text
     """
     WEEKDAYS = set(["monday", "tuesday", "wednesday", "thursday", "friday"])
-    coursees = []
+    courses = []
     day = 'Monday'
     i = 0
 
@@ -80,7 +79,7 @@ def get_coursees(info_list):
             course_location = info_list[i+5].replace("Location: ", "")
 
             this_course = Course(helper_capitalize(course_title), course_type, course_start_time, course_end_time, course_location, day)
-            coursees.append(this_course)
+            courses.append(this_course)
             i += 6
 
         else:
@@ -92,14 +91,18 @@ def get_coursees(info_list):
             course_location = info_list[i+3].replace("Location: ", "")
 
             this_course = Course(helper_capitalize(course_title), course_type, course_start_time, course_end_time, course_location, day)
-            coursees.append(this_course)
+            courses.append(this_course)
             i += 4
 
-    return coursees
+    return courses
 
 def get_schedule(path):
+    """
+    (string) -> list
+    returns list of courses given the path to an image
+    """
     img = get_image(path)
     info_list = extract_information(img)
-    coursees = get_coursees(info_list)
+    courses = get_courses(info_list)
 
-    return coursees
+    return courses

@@ -74,11 +74,12 @@ def write_calendar(calendar, academic_term):
     with open(f'{academic_term}-timetable.ics', 'wb') as ics:
         ics.write(cal.to_ical())
 
-def create_calendar(academic_term, year, classes):
+def create_calendar(academic_term, year, path):
     """
     (string, integer, list) -> creates calendar based on all events created from list of courses
     """
     cal = Calendar()
+    classes = get_schedule(path)
 
     for course in classes:
         event = create_event(course)

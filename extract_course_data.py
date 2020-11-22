@@ -1,11 +1,11 @@
 """
-extracting classes data from an image of a class schedule
+extracting courses data from an image of a course schedule
 """
 
 import cv2
 import pytesseract
 
-class Class:
+class Course:
     def __init__(self, title, type, start_time, end_time, location, day):
         self.title = title
         self.type = type
@@ -57,13 +57,13 @@ def helper_capitalize(text):
 
     return capitalized
 
-def get_classes(info_list):
+def get_coursees(info_list):
     """
     (list) -> list
-    returns list of classes of type Class from given list of raw extracted text
+    returns list of coursees of type Course from given list of raw extracted text
     """
     WEEKDAYS = set(["monday", "tuesday", "wednesday", "thursday", "friday"])
-    classes = []
+    coursees = []
     day = 'Monday'
     i = 0
 
@@ -72,34 +72,34 @@ def get_classes(info_list):
         if current.lower() in WEEKDAYS:
             day = current
 
-            class_title = info_list[i+2].strip()
-            class_type = info_list[i+3]
+            course_title = info_list[i+2].strip()
+            course_type = info_list[i+3]
             time = info_list[i+4]
-            class_start_time = time[:6]
-            class_end_time = time[8:]
-            class_location = info_list[i+5].replace("Location: ", "")
+            course_start_time = time[:6]
+            course_end_time = time[8:]
+            course_location = info_list[i+5].replace("Location: ", "")
 
-            this_class = Class(helper_capitalize(class_title), class_type, class_start_time, class_end_time, class_location, day)
-            classes.append(this_class)
+            this_course = Course(helper_capitalize(course_title), course_type, course_start_time, course_end_time, course_location, day)
+            coursees.append(this_course)
             i += 6
 
         else:
-            class_title = info_list[i].strip()
-            class_type = info_list[i+1]
+            course_title = info_list[i].strip()
+            course_type = info_list[i+1]
             time = info_list[i+2]
-            class_start_time = time[:6]
-            class_end_time = time[8:]
-            class_location = info_list[i+3].replace("Location: ", "")
+            course_start_time = time[:6]
+            course_end_time = time[8:]
+            course_location = info_list[i+3].replace("Location: ", "")
 
-            this_class = Class(helper_capitalize(class_title), class_type, class_start_time, class_end_time, class_location, day)
-            classes.append(this_class)
+            this_course = Course(helper_capitalize(course_title), course_type, course_start_time, course_end_time, course_location, day)
+            coursees.append(this_course)
             i += 4
 
-    return classes
+    return coursees
 
 def get_schedule(path):
     img = get_image(path)
     info_list = extract_information(img)
-    classes = get_classes(info_list)
+    coursees = get_coursees(info_list)
 
-    return classes
+    return coursees

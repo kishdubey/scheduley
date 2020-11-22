@@ -35,21 +35,21 @@ h1 {letter-spacing: 6px}
     </header>
 
     <!-- Instructions -->
-    <div id="instructions" class="w3-row-padding w3-grayscale" style="padding: 16px 16px">
+    <div id="instructions" class="w3-row-padding w3-grayscale" style="padding: 128px 16px">
       <div class="container-fluid">
       	<div class="row">
           <!-- Step 1 -->
           <div class="col-md-4">
             <p style="padding-left:30%">
-              Log into <a href="https://uozone2.uottawa.ca/">uoZone</a>
+              1) Log into <a href="https://uozone2.uottawa.ca/">uoZone</a>
             </p>
             <img style="height:500px;" alt="uoZone" src="https://i.ibb.co/PwvCz7z/Screenshot-2020-11-21-at-11-51-10-PM.png" class="rounded" />
           </div>
 
           <!-- Step 2 -->
           <div class="col-md-4">
-            <p style="margin-left: -6px;">
-              Take a screenshot of your Class Schedule. *Uncheck "Show AM/PM"
+            <p style="margin-left: -29px;">
+              2) Take a screenshot of your Class Schedule. *Uncheck "Show AM/PM"
             </p>
             <p style="margin-left: -60px;">
               <img style="height:500px; width:600px;" alt="uncheck weekends and AM/PM" src="https://i.ibb.co/RvHsJtH/schedulewinter2020.png" class="rounded" />
@@ -62,35 +62,43 @@ h1 {letter-spacing: 6px}
               <div class="form-group">
 
                 <label for="scheduleScreenshot">
-                  Upload Course Schedule Screenshot
-                </label><br>
-                <input style="padding-left: 125px;" class ="centeredField" type="file" class="form-control-file" id="scheduleScreenshot" /><br><br>
+                  3) Upload Course Schedule Screenshot
+                </label>
+                <input style="padding-left: 125px;" class ="centeredField" type="file" class="form-control-file" id="scheduleScreenshot" /><br><br> <br><br><br><br><br>
                 <p class="help-block">
-                  Enter the academic term and year below
+                  4) Enter the academic term and year below
                 </p>
               </div>
-              <div class="radiobutton">
+
+              <div>
+              <div style="text-align: left; margin-left: 160px;" class="radiobutton">
                 <label>
-                  <input type="radio" id="fall" value="Fall">
-                  <label for="fall">Fall</label>
-                  <input type="radio" id="winter" value="Winter">
-                  <label for="winter">Winter</label>
-                  <input type="radio" id="summer" value="Summer">
-                  <label for="summer">Summer</label>
+                  <input type="radio" id="fall" value="Fall" name="term">
+                  <label for="fall">Fall</label><br>
+                  <input type="radio" id="winter" value="Winter" name="term">
+                  <label for="winter">Winter</label><br>
+                  <input type="radio" id="summer" value="Summer" name="term">
+                  <label for="summer">Summer</label><br>
                 </label>
               </div>
-
               <div class="textfield">
-                <input type="text" id="fname" name="fname" placeholder="enter term year here" ><br><br>
+                <input type="number" id="year" name="year" placeholder="enter term year here" ><br><br>
               </div>
+              </div>
+              <br><br><br><br>
+              <p class="help-block">
+                Enjoy your Digital Schedule!
+              </p>
               <button type="submit" style="background-color: #8f001a;" class="btn btn-primary">
                 Submit
               </button>
             </form>
           </div>
-      	</div>
-      </div>
 
+        <!-- End Row -->
+      	</div>
+      <!-- End Bootstrap Container -->
+      </div>
       <!-- End Page Content -->
     </div>
 
@@ -100,7 +108,7 @@ h1 {letter-spacing: 6px}
       <a href="https://github.com/kishdubey/scheduley"><i class="fa fa-github w3-hover-opacity"></i></a>
       <a href="https://www.linkedin.com/in/kishdubey/"><i class="fa fa-linkedin w3-hover-opacity"></i></a>
 
-      <p>made with <i class="fa fa-heart"></i> by <a href="https://www.kishdubey.me/">kish</a><br> s/o to <a href = "https://www.w3schools.com/w3css/w3css_templates.asp">w3.css</a> for the css</p>
+      <p>made with <i class="fa fa-heart"></i> by <a href="https://www.kishdubey.me/">kish</a><br> s/o to <a href="https://www.w3schools.com/w3css/w3css_templates.asp">w3.css</a> for the css</p>
     </footer>
 
   </body>

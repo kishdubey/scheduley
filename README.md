@@ -24,7 +24,7 @@ pip3 install -r required.txt
 ```
 Run the Flask app
 ```
-python3 app.py
+python3 scheduley.py
 ```
 ## Future
 * Deploy on Heroku

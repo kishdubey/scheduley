@@ -4,6 +4,9 @@ data/
 quickstart.py
 *.pickle
 *.ics
+*.png
+*.jpg
+*.jpeg
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

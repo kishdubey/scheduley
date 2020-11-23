@@ -33,4 +33,4 @@ def create_calendar_schedule():
     return render_template("index.html")
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(threaded=True, port=5000)

@@ -30,7 +30,7 @@ def next_weekday(d, weekday):
         days_ahead += 7
     return d + datetime.timedelta(days_ahead)
 
-def create_event(course, academic_term):
+def create_event(course, academic_term, year):
     """
     (course, string) -> event
     returns an event created from the course contents, complying with the dates of the academic_term
@@ -72,7 +72,7 @@ def write_calendar(calendar, academic_term):
     (icalendar, string) -> writes the given icalendar to an .ics file
     """
     with open(f'{academic_term}-timetable.ics', 'wb') as ics:
-        ics.write(cal.to_ical())
+        ics.write(calendar.to_ical())
 
 def create_calendar(academic_term, year, path):
     """
@@ -82,7 +82,7 @@ def create_calendar(academic_term, year, path):
     classes = get_schedule(path)
 
     for course in classes:
-        event = create_event(course)
+        event = create_event(course, academic_term, year)
         cal.add_component(event)
 
     write_calendar(cal, academic_term)

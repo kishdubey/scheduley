@@ -9,14 +9,14 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-@app.route("/")
+@app.route("/index.html")
 def index():
     return render_template('index.html')
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-@app.route("/", methods=['GET', 'POST'])
+@app.route("/landing.html", methods=['GET', 'POST'])
 def create_calendar_schedule():
     if request.method == 'POST':
         term = request.form['term']
@@ -29,13 +29,9 @@ def create_calendar_schedule():
                 image.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
             create_calendar(term, year, os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return send_calendar_schedule()
+            return render_template('landing.html', schedule=os.path.join(app.config['UPLOAD_FOLDER'], "timetable.ics"))
 
     return render_template("index.html")
-
-@app.route('/')
-def send_calendar_schedule():
-    return render_template('landing.html', schedule=os.path.join(app.config['UPLOAD_FOLDER'], "timetable.ics"))
 
 if __name__ == "__main__":
     app.run(debug=True)

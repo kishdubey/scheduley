@@ -35,10 +35,7 @@ def extract_information(image):
     """
     extracted_info = pytesseract.image_to_string(image).strip().replace("\n\n", "\n")
     extracted_info_list = list(extracted_info.split("\n"))
-
-    for item in extracted_info_list:
-        if item == " ":
-            extracted_info_list.remove(item)
+    extracted_info_list = list(filter(lambda item: item.strip() != '', extracted_info_list))
 
     return extracted_info_list
 

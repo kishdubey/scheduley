@@ -16,20 +16,19 @@ def index():
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-@app.route("/landing.html", methods=['GET', 'POST'])
+@app.route("/landing.html", methods=['POST'])
 def create_calendar_schedule():
-    if request.method == 'POST':
-        term = request.form['term']
-        year = int(request.form['year'])
-        if request.files:
-            image = request.files["scheduleFile"]
+    term = request.form['term']
+    year = int(request.form['year'])
+    if request.files:
+        image = request.files["scheduleFile"]
 
-            if image and allowed_file(image.filename):
-                filename = secure_filename(image.filename)
-                image.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        if image and allowed_file(image.filename):
+            filename = secure_filename(image.filename)
+            image.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
-            create_calendar(term, year, os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return render_template('landing.html', schedule=os.path.join(app.config['UPLOAD_FOLDER'], "timetable.ics"))
+        create_calendar(term, year, os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        return render_template('landing.html', schedule=os.path.join(app.config['UPLOAD_FOLDER'], "timetable.ics"))
 
     return render_template("index.html")
 

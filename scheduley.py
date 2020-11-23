@@ -1,6 +1,6 @@
 import os
 from os.path import join, dirname, realpath
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, send_file
 from werkzeug.utils import secure_filename
 from generate_calendar import create_calendar
 
@@ -16,11 +16,11 @@ def index():
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-@app.route("/return_calendar_schedule", methods=['GET', 'POST'])
-def return_calendar_schedule():
+@app.route("/", methods=['GET', 'POST'])
+def create_calendar_schedule():
     if request.method == 'POST':
         term = request.form['term']
-        year = request.form['year']
+        year = int(request.form['year'])
         if request.files:
             image = request.files["scheduleFile"]
 
@@ -29,8 +29,13 @@ def return_calendar_schedule():
                 image.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
             create_calendar(term, year, os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            return send_calendar_schedule()
 
-    return render_template("calendar.html")
+    return render_template("index.html")
+
+@app.route('/')
+def send_calendar_schedule():
+    return render_template('landing.html', schedule=os.path.join(app.config['UPLOAD_FOLDER'], "timetable.ics"))
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -5,6 +5,8 @@ from icalendar import Calendar, Event, vText
 import datetime
 from extract_course_data import get_schedule
 from datetime import time
+import os
+from os.path import join, dirname, realpath
 
 ACADEMIC_TERMS = {"summer": "01/05 - 31/08", "fall": "01/09 - 31/12", "winter": "01/01 - 30/04"}
 WEEKDAYS = {"monday": 0, "tuesday": 1, "wednesday": 2, "thursday": 3, "friday": 4}
@@ -71,7 +73,8 @@ def write_calendar(calendar, academic_term):
     """
     (icalendar, string) -> writes the given icalendar to an .ics file
     """
-    with open(f'{academic_term}-timetable.ics', 'wb') as ics:
+    path = join(dirname(realpath(__file__)), 'static/image/uploads/timetable.ics')
+    with open(path, 'wb') as ics:
         ics.write(calendar.to_ical())
 
 def create_calendar(academic_term, year, path):

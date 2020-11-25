@@ -7,7 +7,6 @@ Simple! Take a screenshot of your course time-table, and import the returned fil
 ## Instructions
 ![Step 1](https://i.ibb.co/JtjRR3V/Screenshot-2020-11-25-at-1-50-06-PM.png)
 ![Step 2](https://i.ibb.co/JCV9tmC/Screenshot-2020-11-25-at-1-50-14-PM.png)
-![Step 3](https://i.ibb.co/Zx5p1KD/Screenshot-2020-11-25-at-1-50-24-PM.png)
 ![Step 4](step4.gif)
 
 ## Run

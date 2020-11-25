@@ -9,6 +9,7 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -29,7 +30,7 @@ def create_calendar_schedule():
                 image.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
             create_calendar(term, year, os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return render_template('landing.html', schedule=os.path.join(app.config['UPLOAD_FOLDER'], "timetable.ics"))
+            return render_template('landing.html')
 
     return render_template("index.html")
 

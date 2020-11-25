@@ -1,1 +1,1 @@
-web: gunicorn scheduley:app
+web: gunicorn app:app

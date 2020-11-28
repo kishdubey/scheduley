@@ -2,7 +2,7 @@ import os
 from os.path import join, dirname, realpath
 from flask import Flask, render_template, request, redirect, url_for, send_file
 from werkzeug.utils import secure_filename
-from generate_calendar import create_calendar
+from static.py.generate_calendar import create_calendar
 
 UPLOAD_FOLDER = join(dirname(realpath(__file__)), 'static/image/uploads/')
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}

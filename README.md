@@ -8,7 +8,7 @@ Simple! Take a screenshot of your course time-table, and import the returned fil
 ![Step 1](https://i.ibb.co/JtjRR3V/Screenshot-2020-11-25-at-1-50-06-PM.png)
 ![Step 2](https://i.ibb.co/JCV9tmC/Screenshot-2020-11-25-at-1-50-14-PM.png)
 
-Step 3)
+3) Download your schedule and upload it to calendar of choice
 
 ![Step 3](https://s2.gifyu.com/images/step4.gif)
 

@@ -10,7 +10,7 @@ Simple! Take a screenshot of your course time-table, and import the returned fil
 
 3) Download your schedule and upload it to calendar of choice
 
-![Step 3](https://s2.gifyu.com/images/step4.gif)
+![Step 3](https://media1.tenor.com/images/c9e236843595b7c34e830c1f91c1c349/tenor.gif?itemid=19328950)
 
 
 ## Run
